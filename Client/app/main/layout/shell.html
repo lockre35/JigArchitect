@@ -1,0 +1,19 @@
+﻿<div layout="column" flex="100" data-ng-controller="Shell as vm">
+  <md-toolbar layout="row">
+    <div class="md-toolbar-tools" data-ng-include="'app/main/layout/topnav.html'">
+
+    </div>
+  </md-toolbar>
+  <div layout="row" layout-fill flex>
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-4dp"
+      md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+      <div data-ng-include="'app/main/layout/sidebar.html'"></div>
+    </md-sidenav>
+    <div layout="column" flex id="content" style="background-color: rgb(241, 241, 241);">
+      <md-content layout="row" flex layout-fill md-scroll-y layout-wrap class="md-padding"
+      data-ng-view class="shuffle-animation" style="background-color: rgb(241, 241, 241);">
+      </md-content>
+    </div>
+  </div>
+
+</div>

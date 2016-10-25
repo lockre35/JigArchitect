@@ -1,0 +1,22 @@
+<div ng-hide="!vm.loading" layout="row" flex layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="140"></md-progress-circular>
+</div>
+
+<div ng-repeat="r in vm.screens" flex-gt-xs="33" layout="column">
+  <md-card style="display: block;">
+    <img ng-src="{{r.icon}}" class="md-card-image" alt="Washed Out" style="width: 100%; height: auto;">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline" style="text-align:center">{{r.name}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content style="text-align:center">
+      <p>
+        {{r.description}}
+      </p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="center center">
+      <md-button ng-href="/application/{{vm.applicationId}}/createscreen/{{r.path}}">Select</md-button>
+    </md-card-actions>
+  </md-card>
+</div>

@@ -1,0 +1,76 @@
+<div ng-hide="!vm.loading" layout="row" flex layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="140"></md-progress-circular>
+</div>
+
+
+<div ng-hide="vm.loading" flex="100">
+  <h2 layout-padding>{{vm.applicationDetails.ApplicationName}}</h2>
+</div>
+<div ng-hide="vm.loading" flex-gt-sm="50" flex="100">
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Description</span>
+        <span class="md-subhead">{{vm.applicationDetails.Description}}</span>
+      </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-md card-media">
+          <img data-ng-src="{{vm.applicationDetails.Icon}}"/>
+        </div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-href="/application/{{vm.applicationDetails.ApplicationId}}/manage">Edit Details</md-button>
+      <md-button ng-href="/application/{{vm.applicationDetails.ApplicationId}}/demo">Demo</md-button>
+    </md-card-actions>
+  </md-card>
+</div>
+<div ng-hide="vm.loading" flex-gt-sm="50" flex="100">
+  <md-card>
+    <md-toolbar class="md-theme-light md-primary md-hue-1">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Roles</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-button" aria-label="Create">
+          Create
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-list-item class="md-3-line" ng-repeat="role in vm.roles">
+        <img ng-src="{{ role.logo }}" class="md-avatar" />
+        <div class="md-list-item-text" layout="column">
+          <h3>{{ role.Name }}</h3>
+          <h4>{{ role.Description }}</h4>
+          <p>Screens: {{ role.Screens }}</p>
+        </div>
+      </md-list-item>
+  </md-card>
+</div>
+<div ng-hide="vm.loading" flex="100">
+  <md-card>
+    <md-toolbar class="md-theme-light md-primary md-hue-1">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Screens</span>
+        </h2>
+        <span flex></span>
+        <md-button ng-href="/application/{{vm.applicationDetails.ApplicationId}}/createscreen" class="md-button" aria-label="Create">
+          Create
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="screen in vm.screens">
+        <div class="md-list-item-text">
+          <h3>{{screen.Name}}</h3>
+          <h4>Type: {{screen.Type}}</h4>
+          <p>Roles: {{screen.SecurityRoles}}</p>
+        </div>
+        <md-button class="md-secondary">Edit</md-button>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-card>
+</div>

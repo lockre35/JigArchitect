@@ -1,0 +1,22 @@
+<div ng-show="vm.loading" layout="row" flex layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="140"></md-progress-circular>
+</div>
+
+<section class="mainbar" ng-hide="vm.loading">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div class="widget-content user">
+                        <h2>Response from server:</h2>
+                        
+                        <pre>{{vm.testData | json}}</pre>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
