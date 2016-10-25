@@ -1,0 +1,27 @@
+<div ng-hide="!vm.loading" layout="row" flex layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="140"></md-progress-circular>
+</div>
+
+<div ng-repeat="r in vm.applications" flex-gt-sm="50" flex="100">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{r.ApplicationName}}</span>
+            <span class="md-subhead">{{r.ToolTip}}</span>
+            <div layout="row" layout-align="left" style="padding-top:20px;">
+              <div flex>Screens: <span class="md-subhead"> {{r.screenCount}}?</span></div>
+              <div flex>Roles: <span class="md-subhead"> {{r.roleCount}}?</span></div>
+            </div>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media">
+              <img data-ng-src="{{r.Icon}}"/>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-href="/application/{{r.ApplicationId}}">Edit</md-button>
+          <md-button ng-href="/application/{{r.ApplicationId}}/demo">Demo</md-button>
+        </md-card-actions>
+      </md-card>
+</div>﻿

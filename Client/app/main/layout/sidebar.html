@@ -1,0 +1,27 @@
+<!--
+<div data-ng-controller="Sidebar as vms">
+  <div data-cc-sidebar when-done-animating="vms.sidebarReady()">
+    <div class="sidebar-filler"></div>
+    <div class="sidebar-dropdown"><a href="#">Menu</a></div>
+    <div class="sidebar-inner">
+        <div class="sidebar-widget"></div>
+        <ul class="navi">
+            <li class="nlightblue fade-selection-animation" data-ng-class="vms.isCurrent(r)"
+                data-ng-repeat="r in vms.navRoutes">
+                <a href="{{r.originalPath}}"
+                   data-ng-bind-html="r.settings.content"></a>
+            </li>
+        </ul>
+    </div>
+    </div>
+</div>
+-->
+<div layout="column" data-ng-controller="Sidebar as vms">
+  <md-button data-ng-class="vms.isCurrent(r)"  ng-click="vm.toggleSidenav('left')"
+    data-ng-repeat="r in vms.navRoutes" ng-href="{{r.originalPath}}" data-ng-bind-html="r.settings.content"
+    style="text-align:left">
+  </md-button>
+  <md-button ng-show="vm.loggedIn" ng-click="vm.logout('left')" style="text-align:left">
+    Logout
+  </md-button>
+</div>

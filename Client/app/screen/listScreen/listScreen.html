@@ -1,0 +1,185 @@
+<div ng-hide="!vm.loading" layout="row" flex layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="140"></md-progress-circular>
+</div>
+
+<div ng-hide="vm.loading" flex="100">
+
+  <md-card class="builder">
+    <!-- Rough Preview -->
+    <div layout="row" layout-align="space-between center" ng-hide="vm.showPreview" style="background: #D1C4D6;">
+      <h3 class="md-headline" style="color: #58525A; margin: 15px 0px 15px 10px;">List Screen</h3>
+      <md-button ng-click="vm.togglePreview()" class="md-icon-button">
+        <md-icon md-svg-src="/content/images/ic_fullscreen_black_18px.svg"></md-icon>
+      </md-button>
+    </div>
+    <div layout="row" ng-show="vm.showPreview" layout-align="center center" style="background: #D1C4D6;">
+      <div flex="80" style="background: white; margin: 40px 40px; margin-bottom: 0px;">
+        <div class="scoped-bootstrap">
+          <div class="col-md-12" style="height: 42px; margin-bottom: 20px; background: #525252;">
+          </div>
+          <div class="col-md-12">
+            <h4></h4>
+              <div class="panel panel-default">
+                <div class="panel-heading">{{vm.screen._Title}}</div>
+              <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                  <thead>
+                    <th ng-repeat="field in vm.screen.Fields.Field | filter: { _Type: '!Hidden' }">
+                      {{field._Title}}
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="i in [1, 2, 3, 4, 5]">
+                      <td ng-repeat="field in vm.screen.Fields.Field | filter: { _Type: '!Hidden' }">{{field._Name}}</td>
+                      <td><p data-placement="top"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                      <td><p data-placement="top"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <ul class="pagination" ng-hide="!vm.screen._Paging">
+              <li class="active" style="border-color: whitesmoke;">
+                <a href="#" style="background: whitesmoke;border-color: #D8D8D8;color: black;">1</a>
+              </li>
+              <li style="border-color: whitesmoke;"><a href="#">2</a></li>
+              <li style="border-color: whitesmoke;"><a href="#">3</a></li>
+              <li style="border-color: whitesmoke;"><a href="#">4</a></li>
+              <li style="border-color: whitesmoke;"><a href="#">5</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="row" layout-align="end center" ng-show="vm.showPreview" style="background: #D1C4D6;">
+      <md-button ng-click="vm.togglePreview()" class="md-icon-button">
+        <md-icon md-svg-src="/content/images/ic_fullscreen_exit_black_18px.svg"></md-icon>
+      </md-button>
+    </div>
+
+    <md-content class="md-padding">
+      <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom md-autoselect>
+
+        <!-- Basic settings -->
+        <md-tab label="Details">
+          <div class="tab1" style="padding: 25px;">
+            <md-input-container class="md-block">
+              <label>Name</label>
+              <input ng-model="vm.screen._Name">
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Title</label>
+              <input ng-model="vm.screen._Title">
+            </md-input-container>
+            <md-switch ng-model="vm.screen._Paging">
+              Paging
+            </md-switch>
+          </div>
+        </md-tab>
+
+        <!-- Data source -->
+        <md-tab label="Data Source">
+          <div class="tab1" style="padding: 25px; text-align: center;">
+
+            <div layout="row" layout-padding layout-wrap layout-fill>
+              <md-whiteframe class="md-whiteframe-5dp" style="background-color: white;" layout="column"  layout-padding flex="100">
+                <div flex="100" layout="row" layout-align="start stretch">
+                  <h3 class="md-headline" flex="40" style="text-align: left;">Primary Data Source</h3>
+
+                    <md-select flex="60" ng-change="vm.getTableDetails()" placeholder="Select a data source" ng-model="vm.screen._DataSourceName"
+                      md-on-open="1+1" style="min-width: 200px;">
+                      <md-option ng-value="table.FullName" ng-repeat="table in vm.tables">
+                        {{table.FullName}}
+                      </md-option>
+                    </md-select>
+
+                </div>
+
+                <div flex="100" layout="row" ng-show="vm.table.Columns" style="paddin-top: 0px; padding-bottom: 0px;">
+                  <h4 class="md-subhead" style="margin: 0px;">Columns</h4>
+                </div>
+                <div flex="100" layout="row" layout-align="start stretch">
+                  <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="column in vm.table.Columns" layout="row"
+                        layout-wrap style="float: left;
+                          padding-right: 8px;
+                          padding-left: 0px;">
+                        <div class="md-item-text md-whiteframe-z1" flex style="padding: 8px;
+                            background: #f0f0f0;
+                            border-radius: 3px;
+                            margin-bottom:8px">
+                          <h4 class"md-body-2" style="text-align: left; margin: 2px;">{{column.Name}}</h3>
+                          <p style="text-align: left; margin: 2px;">{{column.NativeDataTypeName}}</p>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </div>
+                </md-whiteframe>
+              </div>
+
+            </div>
+        </md-tab>
+
+        <!-- Tab for deciding list columns -->
+        <md-tab label="Columns">
+          <div class="tab1" style="padding: 25px; text-align: center;">
+            <div flex="100" layout="row" layout-align="start stretch">
+              <h3 class="md-headline" flex="40" style="text-align: left;">Columns</h3>
+            </div>
+            <div flex="100" layout="row" layout-align="start start" ng-repeat="field in vm.screen.Fields.Field ">
+              <md-input-container class="md-block" flex="40">
+                <label>Title</label>
+                <input ng-model="field._Title">
+              </md-input-container>
+
+              <md-autocomplete flex="30" ng-disabled="!vm.table.Name" md-no-cache="true" md-input-name="autocompleteField"
+                  md-input-minlength="1" md-input-maxlength="18" md-selected-item="field.selectedItem" md-search-text="field.searchText"
+                  md-selected-item-change="field._Name = item.ColumnName;" md-items="item in vm.querySearch(field.searchText)"
+                  md-item-text="item.ColumnName" md-floating-label="Name" md-menu-class="autocomplete-custom-template">
+                <md-item-template>
+                  <span style="display: block; line-height: 2;">
+                    <strong>Column - {{item.ColumnName}}</strong>
+                  </span>
+                  <span style="display: block; line-height: 2;">
+                    Table - {{item.FullName}}
+                  </span>
+                  <span style="display: block; line-height: 2;">
+                    Type  - {{item.Type}}
+                  </span>
+                </md-item-template>
+              </md-autocomplete>
+
+              <md-input-container class="md-block" flex="20">
+                <label>Type</label>
+                <md-select ng-model="field._Type">
+                  <md-option ng-value="type" ng-repeat="type in ['Hidden', 'Text']">{{type}}</md-option>
+                </md-select>
+              </md-input-container>
+
+              <md-button flex ng-click="vm.removeField(field)" class="md-icon-button">
+                <md-icon md-svg-src="/content/images/ic_delete_black_18px.svg"></md-icon>
+              </md-button>
+            </div>
+
+            <div flex="100" layout="row" ng-show="vm.table.Columns" style="paddin-top: 0px; padding-bottom: 0px;"
+              layout-align="center center">
+              <md-button ng-click="vm.addField()" class="md-primary">Add another field</md-button>
+            </div>
+          </div>
+        </md-tab>
+
+        <!-- Tab for actions (links) -->
+        <md-tab label="Actions">
+          <div class="tab1" style="padding: 25px; text-align: center;">
+            <div>Test</div>
+            <br/>
+          </div>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-href="/application/{{vm.applicationDetails.name}}/demo">Save</md-button>
+    </md-card-actions>
+  </md-card>
+</div>

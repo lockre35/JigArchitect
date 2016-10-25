@@ -1,0 +1,39 @@
+<div ng-show="vm.loading" layout="row" flex layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="140"></md-progress-circular>
+</div>
+
+<div ng-hide="vm.loading" layout="row" flex layout-align="center center">
+  <div flex-gt-sm="50" flex="100" style="max-width: 400px;">
+    <form ng-submit="vm.authenticate()">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text style="text-align: center;">
+            <h1 class="md-headline">Login</h1>
+          </md-card-title-text>
+        </md-card-title>
+        <div class="md-subhead" style="text-align: center; color: #F44336;">
+          {{vm.errorMessage}}
+          {{vm.infoMessage}}
+        </div>
+        <md-card-content>
+          <md-input-container class="md-block">
+            <label>Username</label>
+            <input ng-model="vm.name">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input type="password" ng-model="vm.password">
+          </md-input-container>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button type="submit" ng-disabled="vm.loggingIn" class="md-raised md-primary">
+            <span ng-hide="vm.loggingIn">Continue</span>
+            <span ng-show="vm.loggingIn" layout="row" flex layout-align="center center">
+              <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+            </span>
+          </md-button>
+        </md-card-actions>
+      </md-card>
+    </form>
+  </div>
+</div>
