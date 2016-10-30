@@ -42,7 +42,7 @@ namespace Jig.JigArchitect.Domain
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=JigArchitect;Integrated Security=SSPI;");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-I7CQB0D\SQLEXPRESS;Initial Catalog=JigArchitect;Integrated Security=SSPI;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
