@@ -13,5 +13,7 @@ namespace Jig.JigArchitect.Business.Models
         public int ApplicationId { get; set; } 
         
         public string Name { get; set; } 
+        
+        public string Icon { get; set; } 
     }
 }

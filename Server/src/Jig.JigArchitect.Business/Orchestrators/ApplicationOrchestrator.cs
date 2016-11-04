@@ -42,6 +42,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                         {
                             ApplicationId = x.ApplicationId,
                             Name = x.Name,
+                            Icon = x.Icon,
                         }
                     ).ToList();
             
@@ -61,6 +62,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 {
                     ApplicationId = data.ApplicationId,
                     Name = data.Name,
+                    Icon = data.Icon,
                 };
             
             return new ResponseWrapper<GetApplicationDetailsModel>(_validationDictionary, response);
@@ -71,6 +73,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
             var newEntity = new Application
             {
                 Name = model.Name,
+                Icon = model.Icon,
             };
             
             context
@@ -82,6 +85,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
             {
                 ApplicationId = newEntity.ApplicationId,
                 Name = newEntity.Name,
+                Icon = newEntity.Icon,
             };
             
             return new ResponseWrapper<CreateApplicationModel>(_validationDictionary, response);
@@ -96,11 +100,13 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 );
             
             entity.Name = model.Name;
+            entity.Icon = model.Icon;
             context.SaveChanges();
             var response = new EditApplicationModel
             {
                 ApplicationId = entity.ApplicationId,
                 Name = entity.Name,
+                Icon = entity.Icon,
             };
             
             return new ResponseWrapper<EditApplicationModel>(_validationDictionary, response);

@@ -11,5 +11,7 @@ namespace Jig.JigArchitect.Business.Models
     public class EditApplicationInputModel
     {
         public string Name { get; set; } 
+        
+        public string Icon { get; set; } 
     }
 }
