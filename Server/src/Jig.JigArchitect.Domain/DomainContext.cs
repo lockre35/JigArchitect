@@ -24,6 +24,7 @@ namespace Jig.JigArchitect.Domain
 		public DbSet<EnumPropertyValue> EnumPropertyValues { get; set; }
 		public DbSet<Relationship> Relationships { get; set; }
 		public DbSet<Application> Applications { get; set; }
+		public DbSet<Service> Services { get; set; }
 		public DbSet<EndPoint> EndPoints { get; set; }
 		public DbSet<GetAllEndPoint> GetAllEndPoints { get; set; }
 		public DbSet<DeleteEndPoint> DeleteEndPoints { get; set; }
@@ -76,6 +77,15 @@ namespace Jig.JigArchitect.Domain
 			modelBuilder.Entity<EnumProperty>()
 				.HasMany(x => x.EnumPropertyValues)
 				.WithOne(x => x.EnumProperty);
+			modelBuilder.Entity<Application>()
+				.HasMany(x => x.Schemas)
+				.WithOne(x => x.Application);
+			modelBuilder.Entity<Application>()
+				.HasMany(x => x.Services)
+				.WithOne(x => x.Application);
+			modelBuilder.Entity<Service>()
+				.HasMany(x => x.EndPoints)
+				.WithOne(x => x.Service);
 			modelBuilder.Entity<EndPoint>()
 				.HasOne(x => x.GetAllEndPoint)
 				.WithOne(x => x.EndPoint)

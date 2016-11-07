@@ -15,14 +15,13 @@
         vm.title = 'Application Dashboard';
         vm.applicationId = $routeParams.applicationName;
         vm.applicationDetails = {};
-        vm.roles = [];
-        vm.screens = [];
         vm.loading = true;
+        vm.schemas = [];
         activate();
 
         function activate() {
             applicationDashboardService.reset();
-            var promises = [getApplicationDetails(), getRoles(), getScreens()];
+            var promises = [getApplicationDetails(), getSchemas()];
             //var promises = [getApplicationScreens()];
 //            Using a resolver on all routes or dataservice.ready in every controller
 //            return dataservice.ready(promises).then(function(){
@@ -39,18 +38,11 @@
             });
         }
 
-        function getRoles() {
-            return applicationDashboardService.getRoles(vm.applicationId).then(function(data) {
-                vm.roles = data;
-                return vm.roles;
-            });
-        }
-
-        function getScreens() {
-            return applicationDashboardService.getScreens(vm.applicationId).then(function(data) {
-                vm.screens = data;
-                return vm.screens;
-            });
+        function getSchemas() {
+          return applicationDashboardService.getSchemas(vm.applicationId).then(function(data) {
+            vm.schemas = data;
+            return vm.schemas;
+          });
         }
     }
 })();

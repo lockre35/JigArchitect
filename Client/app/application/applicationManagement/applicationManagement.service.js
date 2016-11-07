@@ -31,12 +31,7 @@
         }
 
         function saveApplicationDetails(application, detailModel) {
-          var model = {
-            username : name,
-            password : password
-          };
-
-          return $http.post(config.apiUrl + '/api/applications/' + application, model,
+          return $http.post(config.apiUrl + '/api/applications/' + application, detailModel,
             {headers: {'Content-Type': 'application/json'}})
             .then(getResult)
             .catch(function(message) {
@@ -45,7 +40,7 @@
             });
 
           function getResult(data, status, headers, config) {
-            return data.data;
+            return data.data.Response;
           }
         }
     }

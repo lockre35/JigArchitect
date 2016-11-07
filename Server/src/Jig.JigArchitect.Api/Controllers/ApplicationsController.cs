@@ -40,5 +40,19 @@ namespace Jig.JigArchitect.Controllers
             var orchestrator = new ApplicationOrchestrator(new ModelStateWrapper(this.ModelState));
             return orchestrator.EditApplication(applicationId,model).GetResponse();
         }
+        
+        [HttpGet("/api/Applications/{applicationId}/Schemas")]
+        public dynamic GetAllApplicationSchemas(int applicationId)
+        {
+            var orchestrator = new ApplicationOrchestrator(new ModelStateWrapper(this.ModelState));
+            return orchestrator.GetAllApplicationSchemas(applicationId).GetResponse();
+        }
+        
+        [HttpGet("/api/Applications/{applicationId}/Services")]
+        public dynamic GetAllApplicationServices(int applicationId)
+        {
+            var orchestrator = new ApplicationOrchestrator(new ModelStateWrapper(this.ModelState));
+            return orchestrator.GetAllApplicationServices(applicationId).GetResponse();
+        }
     }
 }

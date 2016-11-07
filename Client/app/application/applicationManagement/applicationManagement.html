@@ -18,23 +18,26 @@
         <div layout="column" flex>
           <md-input-container class="md-block">
             <label>Application Name</label>
-            <input ng-model="vm.applicationDetails.ApplicationName">
+            <input ng-model="vm.applicationDetails.Name" disabled>
           </md-input-container>
           <md-input-container class="md-block">
             <label>Description</label>
-            <textarea ng-model="vm.applicationDetails.Tooltip" md-maxlength="150" rows="5"
+            <textarea ng-model="vm.applicationDetails.Description" md-maxlength="150" rows="5"
               md-select-on-focus></textarea>
           </md-input-container>
         </div>
         <div layout="column" flex>
-          <div class="md-media-md card-media">
-            <img data-ng-src="{{vm.applicationDetails.Icon}}" style="max-height: 125px;
+          <div ng-hide="vm.applicationDetails.Icon" style="text-align: center">
+            No icon uploaded yet!
+          </div>
+          <div class="md-media-md card-media" ng-show="vm.applicationDetails.Icon">
+            <img data-ng-src="{{vm.applicationDetails.Icon}}"
+              style="max-height: 125px;
               width: auto;
               margin: 0 auto;"
               alt="Application Icon"/>
           </div>
           <div layout="row">
-            {{vm.imageUploading}}
             <md-button file-on-change="vm.uploadFile" ng-disabled="vm.imageUploading" flex>
               <span ng-hide="vm.imageUploading">Upload Icon</span>
               <span ng-show="vm.imageUploading" layout="row" flex layout-align="center center">
@@ -44,40 +47,15 @@
           </div>
         </div>
       </div>
-      <hr style="margin: 30px 0px; margin-bottom: 40px; border-width: 1px;
-        border-style: solid; border-color: #C5C4C4;"/>
-        <md-input-container class="md-block">
-          <label>Type</label>
-          <md-select ng-model="vm.applicationDetails.Type">
-            <md-option ng-value="type" ng-repeat="type in ['MVC5']">{{type}}</md-option>
-          </md-select>
-          <div class="md-errors-spacer"></div>
-        </md-input-container>
-        <md-input-container class="md-block">
-
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Security Roles</label>
-          <input ng-model="vm.applicationDetails.SecurityRoles">
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Start Screen</label>
-          <md-select ng-model="vm.applicationDetails.StartScreenName">
-            <md-option ng-repeat="screen in vm.applicationDetails.Screens"
-              value="{{screen.ControllerName}}.{{screen.Name}}">
-              {{screen.ControllerName}}.{{screen.Name}}
-            </md-option>
-          </md-select>
-          <div class="md-errors-spacer"></div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Profile Screen Route Values</label>
-          <input ng-model="vm.applicationDetails.ProfileScreenRouteValues">
-        </md-input-container>
     </md-content>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button>Save</md-button>
-      <!-- <md-button ng-href="/application/{{vm.applicationId}}/demo">Demo</md-button> -->
+      <md-button ng-href="/application/{{vm.applicationId}}">Cancel</md-button>
+      <md-button ng-click="vm.saveApplicationDetails()" ng-disabled="vm.saving">
+        <span ng-hide="vm.saving">Save</span>
+        <span ng-show="vm.saving" layout="row" flex layout-align="center center">
+          <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+        </span>
+      </md-button>
     </md-card-actions>
   </md-card>
 </div>

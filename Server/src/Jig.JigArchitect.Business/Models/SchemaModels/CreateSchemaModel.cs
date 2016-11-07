@@ -13,5 +13,7 @@ namespace Jig.JigArchitect.Business.Models
         public string Name { get; set; } 
         
         public int SchemaId { get; set; } 
+        
+        public int ApplicationId { get; set; } 
     }
 }

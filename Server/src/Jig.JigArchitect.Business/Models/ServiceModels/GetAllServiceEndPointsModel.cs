@@ -8,8 +8,10 @@ using Jig.JigArchitect.Domain.Entities;
 namespace Jig.JigArchitect.Business.Models
 {
     
-    public class CreateEndPointInputModel
+    public class GetAllServiceEndPointsModel
     {
+        public int EndPointId { get; set; } 
+        
         public string Name { get; set; } 
         
         public string Route { get; set; } 

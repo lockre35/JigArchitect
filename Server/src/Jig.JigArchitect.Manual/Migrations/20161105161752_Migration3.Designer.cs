@@ -8,9 +8,10 @@ using Jig.JigArchitect.Manual;
 namespace Jig.JigArchitect.Manual.Migrations
 {
     [DbContext(typeof(WrappedContext))]
-    partial class WrappedContextModelSnapshot : ModelSnapshot
+    [Migration("20161105161752_Migration3")]
+    partial class Migration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")
@@ -116,8 +117,6 @@ namespace Jig.JigArchitect.Manual.Migrations
 
                     b.Property<string>("Route");
 
-                    b.Property<int>("ServiceId");
-
                     b.HasKey("EndPointId");
 
                     b.HasIndex("EndPointModelId");
@@ -125,8 +124,6 @@ namespace Jig.JigArchitect.Manual.Migrations
                     b.HasIndex("RootEndPointToRootEntityDataSourceId");
 
                     b.HasIndex("RootEntityEntityId");
-
-                    b.HasIndex("ServiceId");
 
                     b.ToTable("EndPoints");
                 });
@@ -465,24 +462,6 @@ namespace Jig.JigArchitect.Manual.Migrations
                     b.ToTable("Schemas");
                 });
 
-            modelBuilder.Entity("Jig.JigArchitect.Domain.Entities.Service", b =>
-                {
-                    b.Property<int>("ServiceId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ApplicationId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("PluralName");
-
-                    b.HasKey("ServiceId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("Services");
-                });
-
             modelBuilder.Entity("Jig.JigArchitect.Domain.Entities.DataSource", b =>
                 {
                     b.HasOne("Jig.JigArchitect.Domain.Entities.DataSourceRelation")
@@ -527,11 +506,6 @@ namespace Jig.JigArchitect.Manual.Migrations
                     b.HasOne("Jig.JigArchitect.Domain.Entities.Entity")
                         .WithMany()
                         .HasForeignKey("RootEntityEntityId");
-
-                    b.HasOne("Jig.JigArchitect.Domain.Entities.Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Jig.JigArchitect.Domain.Entities.EndPointCollectionProperty", b =>
@@ -703,14 +677,6 @@ namespace Jig.JigArchitect.Manual.Migrations
                 });
 
             modelBuilder.Entity("Jig.JigArchitect.Domain.Entities.Schema", b =>
-                {
-                    b.HasOne("Jig.JigArchitect.Domain.Entities.Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Jig.JigArchitect.Domain.Entities.Service", b =>
                 {
                     b.HasOne("Jig.JigArchitect.Domain.Entities.Application")
                         .WithMany()

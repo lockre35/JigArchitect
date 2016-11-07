@@ -12,8 +12,8 @@
 
         var service = {
             getApplicationDetails: getApplicationDetails,
-            getRoles: getRoles,
-            getScreens: getScreens,
+            getSchemas: getSchemas,
+            getServices: getServices,
             reset: reset
         };
 
@@ -22,53 +22,44 @@
 
 
         function getApplicationDetails(applicationId) {
-            return prime(applicationId)
+            return $http
+                .get(config.apiUrl + '/api/applications/' + applicationId)
                 .then(getApplicationDetailsComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed for applications')(message);
                 });
 
             function getApplicationDetailsComplete(data, status, headers, config) {
-                return data;
+                if (!data.data.Response.Description) {
+                  data.data.Response.Description = 'No Description';
+                }
+                return data.data.Response;
             }
         }
 
-        function getRoles(applicationId) {
-            return prime(applicationId)
-                .then(getRolesComplete)
+        function getSchemas(applicationId) {
+            return $http
+                .get(config.apiUrl + '/api/applications/' + applicationId + '/schemas')
+                .then(getSchemasComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed for application schemas')(message);
+                });
+
+            function getSchemasComplete(data, status, headers, config) {
+                return data.data.Response;
+            }
+        }
+
+        function getServices(applicationId) {
+            return $http
+                .get(config.apiUrl + '/api/applications/' + applicationId)
+                .then(getApplicationDetailsComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed for applications')(message);
                 });
 
-            function getRolesComplete(data, status, headers, config) {
-                data.Roles.forEach(function(role){
-                  var screens = 0;
-                  var currentRole = role;
-                  screens = data.Screens.filter(function(screen){
-                    return screen.Roles.filter(function(innerRole){
-                      if(innerRole === currentRole.Name)
-                        return true;
-                      return false;
-                    }).length > 0;
-                  }).length;
-                  role.Screens = screens;
-                });
-                return data.Roles;
-            }
-        }
-
-        function getScreens(applicationId) {
-            return prime(applicationId)
-                .then(getScreensComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed for applications')(message);
-                });
-
-            function getScreensComplete(data, status, headers, config) {
-                data.Screens.forEach(function(screen){
-                  screen.Role = screen.Roles[0];
-                });
-                return data.Screens;
+            function getApplicationDetailsComplete(data, status, headers, config) {
+                return data.data.Response;
             }
         }
 

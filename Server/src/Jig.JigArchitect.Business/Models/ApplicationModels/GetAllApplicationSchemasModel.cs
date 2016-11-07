@@ -8,12 +8,12 @@ using Jig.JigArchitect.Domain.Entities;
 namespace Jig.JigArchitect.Business.Models
 {
     
-    public class EditApplicationInputModel
+    public class GetAllApplicationSchemasModel
     {
         public string Name { get; set; } 
         
-        public string Icon { get; set; } 
+        public int SchemaId { get; set; } 
         
-        public string Description { get; set; } 
+        public int ApplicationId { get; set; } 
     }
 }

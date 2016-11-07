@@ -135,6 +135,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                     CustomEndPoint = data.CustomEndPoint,
                     EndPointType = data.EndPointType,
                     RootEntityEntityId = data.RootEntityEntityId,
+                    ServiceId = data.ServiceId,
                     EndPointModelId = data.EndPointModelId,
                     RootEndPointToRootEntityDataSourceId = data.RootEndPointToRootEntityDataSourceId,
                 };

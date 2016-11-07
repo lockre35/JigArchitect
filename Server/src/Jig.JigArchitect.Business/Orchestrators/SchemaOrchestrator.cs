@@ -44,6 +44,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                         {
                             Name = x.Name,
                             SchemaId = x.SchemaId,
+                            ApplicationId = x.ApplicationId,
                         }
                     ).ToList();
             
@@ -63,6 +64,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 {
                     Name = data.Name,
                     SchemaId = data.SchemaId,
+                    ApplicationId = data.ApplicationId,
                 };
             
             return new ResponseWrapper<GetSchemaDetailsModel>(_validationDictionary, response);
@@ -73,6 +75,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
             var newEntity = new Schema
             {
                 Name = model.Name,
+                ApplicationId = model.ApplicationId,
             };
             
             context
@@ -84,6 +87,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
             {
                 Name = newEntity.Name,
                 SchemaId = newEntity.SchemaId,
+                ApplicationId = newEntity.ApplicationId,
             };
             
             return new ResponseWrapper<CreateSchemaModel>(_validationDictionary, response);
@@ -98,11 +102,13 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 );
             
             entity.Name = model.Name;
+            entity.ApplicationId = model.ApplicationId;
             context.SaveChanges();
             var response = new EditSchemaModel
             {
                 Name = entity.Name,
                 SchemaId = entity.SchemaId,
+                ApplicationId = entity.ApplicationId,
             };
             
             return new ResponseWrapper<EditSchemaModel>(_validationDictionary, response);

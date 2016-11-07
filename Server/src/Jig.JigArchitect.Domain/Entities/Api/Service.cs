@@ -8,13 +8,13 @@ using System.ComponentModel.DataAnnotations;
 namespace Jig.JigArchitect.Domain.Entities 
 {
 	
-	public class Schema
+	public class Service
 	{
-		[Required]
+		public int ServiceId { get; set; }
 		public string Name { get; set; }
-		public int SchemaId { get; set; }
+		public string PluralName { get; set; }
 		public int ApplicationId { get; set; }
-		public virtual ICollection<Entity> Entities { get; set; }
+		public virtual ICollection<EndPoint> EndPoints { get; set; }
 		public virtual Application Application { get; set; }
 		
 	}

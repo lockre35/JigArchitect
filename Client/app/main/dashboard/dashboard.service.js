@@ -76,11 +76,11 @@
 
             function getApplicationsComplete(data, status, headers, config) {
                 data.data.Response.forEach(function(application){
-                  if (application.Icon === 'AA==') {
+                  if (application.Icon === 'AA==' || !application.Icon) {
                     application.Icon = getRandomIcon();
                   }
-                  if (!application.ToolTip) {
-                    application.ToolTip = getRandomDesciption();
+                  if (!application.Description) {
+                    application.Description = 'No Description';
                   }
                   // application.screenCount = application.screens.length;
                   // application.roleCount = application.roles.length;

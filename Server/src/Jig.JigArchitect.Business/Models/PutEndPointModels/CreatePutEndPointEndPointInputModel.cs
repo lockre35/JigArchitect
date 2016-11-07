@@ -20,6 +20,8 @@ namespace Jig.JigArchitect.Business.Models
         
         public int? RootEntityEntityId { get; set; } 
         
+        public int ServiceId { get; set; } 
+        
         public int EndPointModelId { get; set; } 
         
         public int? RootEndPointToRootEntityDataSourceId { get; set; } 

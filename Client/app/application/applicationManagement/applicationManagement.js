@@ -3,11 +3,13 @@
 
     angular
         .module('app.applicationManagement')
-        .controller('ApplicationManagement', ['$q','applicationManagementService','logger','$routeParams', ApplicationManagement]);
+        .controller('ApplicationManagement', ['$q', '$location',
+          'applicationManagementService','logger','$routeParams', ApplicationManagement]);
 
     //ApplicationManagement.$inject = ['$q', 'dataservice', 'logger', '$routeParams'];
 
-    function ApplicationManagement($q, applicationManagementService, logger, $routeParams) {
+    function ApplicationManagement($q, $location, applicationManagementService,
+      logger, $routeParams) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -21,6 +23,7 @@
         vm.saving = false;
         vm.uploadFile = uploadFile;
         vm.imageUploading = false;
+        vm.saveApplicationDetails = saveApplicationDetails;
         activate();
 
         function activate() {
@@ -36,16 +39,18 @@
         function getApplicationDetails() {
             return applicationManagementService.getApplicationDetails(vm.applicationId).then(function(data) {
                 vm.applicationDetails = data;
-                vm.applicationName = data.ApplicationName;
+                vm.applicationName = data.Name;
                 return vm.applicationDetails;
             });
         }
 
         function saveApplicationDetails() {
           vm.saving = true;
-          return applicationManagementService.authenticate(vm.applicationId, vm.applicationDetails)
+          return applicationManagementService.saveApplicationDetails(vm.applicationId, vm.applicationDetails)
             .then(function(data) {
               vm.saving = false;
+              logger.success('Application Details Saved!');
+              $location.path('/application/' + vm.applicationId).search({returnUrl: null});
           });
         }
 
@@ -53,14 +58,12 @@
           vm.imageUploading = true;
           var files = event.target.files;
           if(files[0]){
-            console.log('here');
             var photofile = files[0];
             var reader = new FileReader();
             reader.onload = function(e) {
               // handle onload
               vm.applicationDetails.Icon = reader.result;
               vm.imageUploading = false;
-              console.log('here');
              };
             reader.readAsDataURL(photofile);
           }

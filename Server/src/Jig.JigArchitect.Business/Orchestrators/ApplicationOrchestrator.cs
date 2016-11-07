@@ -20,6 +20,10 @@ namespace Jig.JigArchitect.Business.Orchestrators
         ResponseWrapper<CreateApplicationModel> CreateApplication(CreateApplicationInputModel model);
         
         ResponseWrapper<EditApplicationModel> EditApplication(int applicationId,EditApplicationInputModel model);
+        
+        ResponseWrapper<List<GetAllApplicationSchemasModel>> GetAllApplicationSchemas(int applicationId);
+        
+        ResponseWrapper<List<GetAllApplicationServicesModel>> GetAllApplicationServices(int applicationId);
     }
     
     
@@ -43,6 +47,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                             ApplicationId = x.ApplicationId,
                             Name = x.Name,
                             Icon = x.Icon,
+                            Description = x.Description,
                         }
                     ).ToList();
             
@@ -63,6 +68,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                     ApplicationId = data.ApplicationId,
                     Name = data.Name,
                     Icon = data.Icon,
+                    Description = data.Description,
                 };
             
             return new ResponseWrapper<GetApplicationDetailsModel>(_validationDictionary, response);
@@ -74,6 +80,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
             {
                 Name = model.Name,
                 Icon = model.Icon,
+                Description = model.Description,
             };
             
             context
@@ -86,6 +93,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 ApplicationId = newEntity.ApplicationId,
                 Name = newEntity.Name,
                 Icon = newEntity.Icon,
+                Description = newEntity.Description,
             };
             
             return new ResponseWrapper<CreateApplicationModel>(_validationDictionary, response);
@@ -101,15 +109,60 @@ namespace Jig.JigArchitect.Business.Orchestrators
             
             entity.Name = model.Name;
             entity.Icon = model.Icon;
+            entity.Description = model.Description;
             context.SaveChanges();
             var response = new EditApplicationModel
             {
                 ApplicationId = entity.ApplicationId,
                 Name = entity.Name,
                 Icon = entity.Icon,
+                Description = entity.Description,
             };
             
             return new ResponseWrapper<EditApplicationModel>(_validationDictionary, response);
+        }
+        
+        public ResponseWrapper<List<GetAllApplicationSchemasModel>> GetAllApplicationSchemas(int applicationId)
+        {
+            var response = context
+                .Applications
+                .Include(i => i.Schemas)
+                .Single(x => 
+                    x.ApplicationId == applicationId
+                )
+                .Schemas
+                    .Select(x =>
+                        new GetAllApplicationSchemasModel
+                        {
+                            Name = x.Name,
+                            SchemaId = x.SchemaId,
+                            ApplicationId = x.ApplicationId,
+                        }
+                    ).ToList();
+            
+            return new ResponseWrapper<List<GetAllApplicationSchemasModel>>(_validationDictionary, response);
+        }
+        
+        public ResponseWrapper<List<GetAllApplicationServicesModel>> GetAllApplicationServices(int applicationId)
+        {
+            var response = context
+                .Applications
+                .Include(i => i.Services)
+                .Single(x => 
+                    x.ApplicationId == applicationId
+                )
+                .Services
+                    .Select(x =>
+                        new GetAllApplicationServicesModel
+                        {
+                            ServiceId = x.ServiceId,
+                            Name = x.Name,
+                            PluralName = x.PluralName,
+                            ApplicationId = x.ApplicationId,
+                        }
+                    ).ToList();
+            
+            return new ResponseWrapper<List<GetAllApplicationServicesModel>>(_validationDictionary, response);
         }
     }
 }

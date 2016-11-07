@@ -58,6 +58,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                             CustomEndPoint = x.CustomEndPoint,
                             EndPointType = x.EndPointType,
                             RootEntityEntityId = x.RootEntityEntityId,
+                            ServiceId = x.ServiceId,
                             EndPointModelId = x.EndPointModelId,
                             RootEndPointToRootEntityDataSourceId = x.RootEndPointToRootEntityDataSourceId,
                         }
@@ -83,6 +84,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                     CustomEndPoint = data.CustomEndPoint,
                     EndPointType = data.EndPointType,
                     RootEntityEntityId = data.RootEntityEntityId,
+                    ServiceId = data.ServiceId,
                     EndPointModelId = data.EndPointModelId,
                     RootEndPointToRootEntityDataSourceId = data.RootEndPointToRootEntityDataSourceId,
                 };
@@ -99,6 +101,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 CustomEndPoint = model.CustomEndPoint,
                 EndPointType = model.EndPointType,
                 RootEntityEntityId = model.RootEntityEntityId,
+                ServiceId = model.ServiceId,
                 EndPointModelId = model.EndPointModelId,
                 RootEndPointToRootEntityDataSourceId = model.RootEndPointToRootEntityDataSourceId,
             };
@@ -116,6 +119,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 CustomEndPoint = newEntity.CustomEndPoint,
                 EndPointType = newEntity.EndPointType,
                 RootEntityEntityId = newEntity.RootEntityEntityId,
+                ServiceId = newEntity.ServiceId,
                 EndPointModelId = newEntity.EndPointModelId,
                 RootEndPointToRootEntityDataSourceId = newEntity.RootEndPointToRootEntityDataSourceId,
             };
@@ -136,6 +140,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
             entity.CustomEndPoint = model.CustomEndPoint;
             entity.EndPointType = model.EndPointType;
             entity.RootEntityEntityId = model.RootEntityEntityId;
+            entity.ServiceId = model.ServiceId;
             entity.EndPointModelId = model.EndPointModelId;
             entity.RootEndPointToRootEntityDataSourceId = model.RootEndPointToRootEntityDataSourceId;
             context.SaveChanges();
@@ -147,6 +152,7 @@ namespace Jig.JigArchitect.Business.Orchestrators
                 CustomEndPoint = entity.CustomEndPoint,
                 EndPointType = entity.EndPointType,
                 RootEntityEntityId = entity.RootEntityEntityId,
+                ServiceId = entity.ServiceId,
                 EndPointModelId = entity.EndPointModelId,
                 RootEndPointToRootEntityDataSourceId = entity.RootEndPointToRootEntityDataSourceId,
             };

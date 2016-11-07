@@ -16,6 +16,7 @@ namespace Jig.JigArchitect.Domain.Entities
 		public bool CustomEndPoint { get; set; }
 		public virtual EndPointType EndPointType { get; set; }
 		public int? RootEntityEntityId { get; set; }
+		public int ServiceId { get; set; }
 		public int EndPointModelId { get; set; }
 		public int? RootEndPointToRootEntityDataSourceId { get; set; }
 		public virtual GetAllEndPoint GetAllEndPoint { get; set; }
@@ -25,6 +26,7 @@ namespace Jig.JigArchitect.Domain.Entities
 		public virtual GetDetailsEndPoint GetDetailsEndPoint { get; set; }
 		public virtual ICollection<EndPointParameter> EndPointParameters { get; set; }
 		public virtual Entity RootEntity { get; set; }
+		public virtual Service Service { get; set; }
 		public virtual EndPointModel EndPointModel { get; set; }
 		public virtual DataSource RootEndPointToRootEntity { get; set; }
 		

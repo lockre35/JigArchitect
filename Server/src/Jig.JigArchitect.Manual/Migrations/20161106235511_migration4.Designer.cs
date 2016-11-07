@@ -8,9 +8,10 @@ using Jig.JigArchitect.Manual;
 namespace Jig.JigArchitect.Manual.Migrations
 {
     [DbContext(typeof(WrappedContext))]
-    partial class WrappedContextModelSnapshot : ModelSnapshot
+    [Migration("20161106235511_migration4")]
+    partial class migration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")

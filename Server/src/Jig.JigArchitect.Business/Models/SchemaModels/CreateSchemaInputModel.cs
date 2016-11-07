@@ -11,5 +11,7 @@ namespace Jig.JigArchitect.Business.Models
     public class CreateSchemaInputModel
     {
         public string Name { get; set; } 
+        
+        public int ApplicationId { get; set; } 
     }
 }
