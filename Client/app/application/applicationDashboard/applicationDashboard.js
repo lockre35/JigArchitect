@@ -17,11 +17,12 @@
         vm.applicationDetails = {};
         vm.loading = true;
         vm.schemas = [];
+        vm.services = [];
         activate();
 
         function activate() {
             applicationDashboardService.reset();
-            var promises = [getApplicationDetails(), getSchemas()];
+            var promises = [getApplicationDetails(), getSchemas(), getServices()];
             //var promises = [getApplicationScreens()];
 //            Using a resolver on all routes or dataservice.ready in every controller
 //            return dataservice.ready(promises).then(function(){
@@ -42,6 +43,13 @@
           return applicationDashboardService.getSchemas(vm.applicationId).then(function(data) {
             vm.schemas = data;
             return vm.schemas;
+          });
+        }
+
+        function getServices() {
+          return applicationDashboardService.getServices(vm.applicationId).then(function(data) {
+            vm.services = data;
+            return vm.services;
           });
         }
     }

@@ -33,7 +33,8 @@
             <span>Schemas</span>
           </h2>
           <span flex></span>
-          <md-button class="md-button" aria-label="Create">
+          <md-button ng-href="/application/{{vm.applicationDetails.ApplicationId}}/schemas/create"
+            class="md-button" aria-label="Create">
             Create
           </md-button>
         </div>
@@ -61,15 +62,16 @@
             <span>Services</span>
           </h2>
           <span flex></span>
-          <md-button ng-href="/application/{{vm.applicationDetails.ApplicationId}}/createscreen" class="md-button" aria-label="Create">
+          <md-button ng-href="/application/{{vm.applicationDetails.ApplicationId}}/services/create"
+            class="md-button" aria-label="Create">
             Create
           </md-button>
         </div>
       </md-toolbar>
       <md-list>
-        <md-list-item class="md-3-line" ng-repeat="schema in vm.schemas">
+        <md-list-item class="md-3-line" ng-repeat="service in vm.services">
           <div class="md-list-item-text">
-            <h3>{{schema.Name}}</h3>
+            <h3>{{service.Name}}</h3>
             <!-- <h4>Type: {{screen.Type}}</h4> -->
             <!-- <p>Roles: {{screen.SecurityRoles}}</p> -->
           </div>

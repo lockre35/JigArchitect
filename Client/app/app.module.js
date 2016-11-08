@@ -27,7 +27,10 @@
         'app.applicationDashboard',
         'app.applicationManagement',
         'app.screenSplash',
-        'app.listScreen'
+        'app.listScreen',
+        'app.schemaManagement',
+        'app.schemaCreation',
+        'app.schemaDashboard'
     ]);
 
 })();

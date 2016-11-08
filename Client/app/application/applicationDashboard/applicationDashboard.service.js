@@ -52,7 +52,7 @@
 
         function getServices(applicationId) {
             return $http
-                .get(config.apiUrl + '/api/applications/' + applicationId)
+                .get(config.apiUrl + '/api/applications/' + applicationId + '/services')
                 .then(getApplicationDetailsComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed for applications')(message);
